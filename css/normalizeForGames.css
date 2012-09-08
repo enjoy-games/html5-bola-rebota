@@ -43,5 +43,5 @@
 
 body {
 	background-color:black; color:white; overflow:hidden; }
-#gameScreen {
+#canvasGameScreen {
 	height:100%; left:50%; position:absolute; top:50%; width:100%; }

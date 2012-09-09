@@ -88,19 +88,21 @@
 
 	// Objeto bola.
 	contenedor_elementos['bola'] = {
-		x: 150,
-		y: 50,
-		vel_x: 4,
-		vel_y: 4,
+		x: 800/2,
+		y: 600/2,
+		vel_x: 16,
+		vel_y: -8,
 		top: 0,
-		left: 40,
-		right: 279,
-		bottom: 239
+		left: 100,
+		right: 700 - 16,
+		bottom: 600 - 16,
+		ancho: 16,
+		alto: 16
 	};
 
 	// Objeto pala_jugador.
 	contenedor_elementos['pala_jugador'] = {
-		x: 150,
+		x: 800/2,
 		y: 100,
 		vel_x: 4,
 		left: contenedor_elementos['bola'].left,
@@ -129,14 +131,73 @@
 
 	// Actualiza los datos necesarios en cada 'fps'.
 	function buclePrincipal() {
-		// Actualiza el estado de la bola.
-		// TODO
+
+		if( contenedor_elementos['estados'].juego ) {
+
+		// ACTUALIZA EL ESTADO DE LA BOLA.
+
+			// Desplazamiento.
+			contenedor_elementos['bola'].x += contenedor_elementos['bola'].vel_x;
+			contenedor_elementos['bola'].y += contenedor_elementos['bola'].vel_y;
+
+			// Colision con borde derecho.
+			if( contenedor_elementos['bola'].x > contenedor_elementos['bola'].right - contenedor_elementos['bola'].ancho ) {
+
+				// Respeta el límite.
+				contenedor_elementos['bola'].x = contenedor_elementos['bola'].right - contenedor_elementos['bola'].ancho;
+
+				// Rebota.
+				contenedor_elementos['bola'].vel_x *= -1; // TODO random.
+
+			}
+
+			// Colision con borde izquierdo.
+			if( contenedor_elementos['bola'].x < contenedor_elementos['bola'].left ) {
+
+				// Respeta el límite.
+				contenedor_elementos['bola'].x = contenedor_elementos['bola'].left
+
+				// Rebota.
+				contenedor_elementos['bola'].vel_x *= -1; // TODO random.
+
+			}
+
+			// Colision con borde superior.
+			if( contenedor_elementos['bola'].y < contenedor_elementos['bola'].top ) {
+
+				// Respeta el límite.
+				contenedor_elementos['bola'].y = contenedor_elementos['bola'].top;
+
+				// Rebota.
+				contenedor_elementos['bola'].vel_y *= -1;
+
+				// Punto para el jugador.
+				contenedor_elementos['pala_jugador'].puntos ++;
+
+			}
+
+			// Colision con borde inferior.
+			if( contenedor_elementos['bola'].y > contenedor_elementos['bola'].bottom - contenedor_elementos['bola'].alto ) {
+
+				// Respeta el límite.
+				contenedor_elementos['bola'].y = contenedor_elementos['bola'].bottom - contenedor_elementos['bola'].alto;
+
+				// Rebota.
+				contenedor_elementos['bola'].vel_y *= -1;
+
+				// Punto para la IA.
+				contenedor_elementos['pala_ia'].puntos ++;
+
+			}
+
+		}
 
 		// Actualiza los gráficos del canvas.
 		camara2d.actualizar();
 
 		// Crea un hilo de ejecución para el siguiente frame.
 		mainLoop = window.requestAnimationFrame(buclePrincipal);
+
 	};
 
 

@@ -187,11 +187,44 @@ function Camara2D(imagenes, elementos) {
 				);
 
 				// Dibuja el texto.
+				this.contextBufferScreen.beginPath();
 				this.contextBufferScreen.fillStyle = "#555555";
 				for( var i = 0; i < lines.length; i++ )
 					this.contextBufferScreen.fillText(lines[i], x, y + i*height);
 
 			}
+
+
+		// CONTADOR JUGADOR.     --------//
+
+			// Tamaño y fuente.
+			this.contextBufferScreen.font = "60pt Calibri";
+
+			// Dibuja el texto.
+			this.contextBufferScreen.beginPath();
+			this.contextBufferScreen.fillStyle = "#ffffff";
+			this.contextBufferScreen.textBaseline = 'top';
+			this.contextBufferScreen.fillText(
+				this.elementos['pala_jugador'].puntos,
+				27,
+				56
+			);
+
+
+		// CONTADOR IA.     --------//
+
+			// Tamaño y fuente.
+			this.contextBufferScreen.font = "60pt Calibri";
+
+			// Dibuja el texto.
+			this.contextBufferScreen.beginPath();
+			this.contextBufferScreen.fillStyle = "#ffffff";
+			this.contextBufferScreen.textBaseline = 'top';
+			this.contextBufferScreen.fillText(
+				this.elementos['pala_ia'].puntos,
+				730,
+				56
+			);
 
 		} else {
 			// TODO

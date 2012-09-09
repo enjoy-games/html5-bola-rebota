@@ -132,6 +132,9 @@
 	// Actualiza los datos necesarios en cada 'fps'.
 	function buclePrincipal() {
 
+
+	// ESTADO: JUEGO.
+
 		if( contenedor_elementos['estados'].juego ) {
 
 		// ACTUALIZA EL ESTADO DE LA BOLA.
@@ -194,6 +197,31 @@
 
 		// Actualiza los gráficos del canvas.
 		camara2d.actualizar();
+
+
+	// FIN DE JUEGO.
+
+		// Gana el jugador
+		if( contenedor_elementos['pala_jugador'].puntos >= 3 ) {
+
+			contenedor_elementos['estados'].juego = false;
+			contenedor_elementos['estados'].ganador = true;
+
+			// Reiniciar tras 5 segundos.
+			// TODO
+
+		}
+
+		// Gana la IA.
+		if( contenedor_elementos['pala_ia'].puntos >= 3 ) {
+			contenedor_elementos['estados'].juego = false;
+			contenedor_elementos['estados'].perdedor = true;
+
+			// Reiniciar tras 5 segundos.
+			// TODO
+
+		}
+
 
 		// Crea un hilo de ejecución para el siguiente frame.
 		mainLoop = window.requestAnimationFrame(buclePrincipal);
@@ -282,9 +310,8 @@
 
 				}
 
-			} else {
-				// TODO
 			}
+
 			// El evento continúa normalmente.
 			return true;
 		};

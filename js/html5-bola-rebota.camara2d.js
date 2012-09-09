@@ -130,6 +130,69 @@ function Camara2D(imagenes, elementos) {
 
 			this.contextBufferScreen.drawImage(this.img['menu'], 0, 0);
 
+		// Mostrar pantalla de juego.
+		} else if( elementos['estados'].juego ) {
+
+		// FONDO.    --------//
+
+			this.contextBufferScreen.drawImage(this.img['juego'], 0, 0);
+
+
+		// BOLA.    --------//
+
+			// Dibuja la pelota en la pantalla.
+			this.contextBufferScreen.drawImage(
+				this.img['bola'],
+				this.elementos['bola'].x,
+				this.elementos['bola'].y
+			);
+
+			// Depuración de pelota.
+			if( this.debugMode ) {
+
+				// Posición de la caja.
+				var x = this.elementos['bola'].x + 19;
+				var y = this.elementos['bola'].y + 19;
+
+				// Alto del texto en medida pt.
+				var height = 10;
+
+				// Datos a mostrar.
+				var x_pos = Math.round(this.elementos['bola'].x * 100) / 100;
+				var y_pos = Math.round(this.elementos['bola'].y * 100) / 100;
+				var vel_x = Math.round(this.elementos['bola'].vel_x * 100) / 100;
+				var vel_y = Math.round(this.elementos['bola'].vel_y * 100) / 100;
+
+				// Lineas de información.
+				var lines = Array();
+				lines[0] = "x=" + x_pos + ",y=" + y_pos;
+				lines[1] = "vel_x=" + vel_x + "";
+				lines[2] = "vel_y=" + vel_y + "";
+
+				// Tamaño y fuente.
+				this.contextBufferScreen.font = height + "pt Calibri";
+
+				// Obtiene el ancho de la primera línea.
+				var metrics = this.contextBufferScreen.measureText("x=000.00,y=000.00");
+				var width = metrics.width;
+
+				// Dibuja la caja.
+				this.contextBufferScreen.beginPath();
+				this.contextBufferScreen.fillStyle = "#d0efff";
+				this.contextBufferScreen.fillRect(
+					x - 2,
+					y - height - 2,
+					width + 4,
+					lines.length*height + 4
+				);
+
+				// Dibuja el texto.
+				this.contextBufferScreen.fillStyle = "#555555";
+				for( var i = 0; i < lines.length; i++ )
+					this.contextBufferScreen.fillText(lines[i], x, y + i*height);
+
+			}
+
 		} else {
 			// TODO
 		}

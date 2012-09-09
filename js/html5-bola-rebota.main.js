@@ -197,8 +197,29 @@
 
 			if( contenedor_elementos['estados'].licencia ) {
 
+				// Información en consola javascript del navegador.
+				console.info("Estado: Menú.");
+
 				contenedor_elementos['estados'].licencia = false;
 				contenedor_elementos['estados'].menu = true;
+
+			} else if( contenedor_elementos['estados'].menu ) {
+
+				// Si pulsa alguna tecla...
+				switch (keychar) {
+
+				// Si pulsa la tecla espacio.
+					case ' ':
+
+						// Información en consola javascript del navegador.
+						console.info("Estado: Juego.");
+
+						contenedor_elementos['estados'].menu = false;
+						contenedor_elementos['estados'].juego = true;
+
+					break;
+
+				}
 
 			} else {
 				// TODO

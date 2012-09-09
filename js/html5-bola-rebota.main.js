@@ -195,30 +195,14 @@
 			// De código numérico(keycode) a carácter(keychar).
 			keychar = String.fromCharCode(keycode);
 
-			// Si pulsa alguna tecla...
-			switch (keychar) {
-			// Si pulsa la tecla 'q'.
-				case 'q': case 'Q':
-					// Información en consola javascript del navegador.
-					console.info("Bucle principal finalizado por el usuario.");
+			if( contenedor_elementos['estados'].licencia ) {
 
-					// Se para el bucle principal.
-					window.cancelAnimationFrame(mainLoop);
-				break;
-			// Si no es un caracter imprimible.
-				default:
-					// Si pulsa la tecla control (izquierda o derecha).
-					if (keycode == 17) {
-						// Activa / desactiva el modo depuración.
-						camara2d.debugMode = !(camara2d.debugMode);
+				contenedor_elementos['estados'].licencia = false;
+				contenedor_elementos['estados'].menu = true;
 
-						// Información en consola javascript del navegador.
-						console.info("Debug mode: " + camara2d.debugMode + ".");
-					}
-					// Si no ha pulsado ninguna tecla.
-					//if (keycode == null)
+			} else {
+				// TODO
 			}
-
 			// El evento continúa normalmente.
 			return true;
 		};

@@ -41,8 +41,13 @@
 
 */
 ;
+
+
 // CLASE cámara.
+
 function Camara2D(imagenes, elementos) {
+
+
 // PROPIEDADES.    --------//
 
 	// Activa o desactiva modo debug.
@@ -82,8 +87,10 @@ function Camara2D(imagenes, elementos) {
 
 	// Actualiza el gráfico canvas.
 	this.actualizar = function() {
+
+		// Mostrar texto de licencia.
 		if( elementos['estados'].licencia ) {
-			// Mostrar texto de licencia.
+
 			var texto = new Array();
 			texto[0] = 'Copyright 2012 Sergio Lindo - <sergiolindo.empresa@gmail.com>';
 			texto[1] = '';
@@ -109,7 +116,7 @@ function Camara2D(imagenes, elementos) {
 			this.contextGameScreen.fillStyle = '#000000';
 			this.contextGameScreen.textBaseline = 'top';
 
-			this.contextGameScreen.drawImage(imagenes['gplv3-127x51'], 50, 30);
+			this.contextGameScreen.drawImage(this.img['gplv3-127x51'], 50, 30);
 			var i;
 			for(i = 0; i < texto.length; i++) {
 				this.contextGameScreen.fillText(texto[i], 25, 90+i*20);
@@ -117,6 +124,11 @@ function Camara2D(imagenes, elementos) {
 
 			this.contextGameScreen.fillStyle = '#000099'; 
 			this.contextGameScreen.fillText('Pulsa una tecla para continuar.', 30, 90+i*20);
+
+		// Mostrar pantalla de menú.
+		} else if( elementos['estados'].menu ) {
+
+			this.contextBufferScreen.drawImage(this.img['menu'], 0, 0);
 
 		} else {
 			// TODO

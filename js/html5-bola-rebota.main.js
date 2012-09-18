@@ -348,6 +348,41 @@
 
 				}
 
+			} else if( contenedor_elementos['estados'].juego ) {
+
+				// Si pulsa alguna tecla...
+				switch (keycode) {
+
+				// Si pulsa la tecla enter.
+					case 13:
+
+						// Información en consola javascript del navegador.
+						console.info("Estado: Pausa.");
+
+						contenedor_elementos['estados'].juego = false;
+						contenedor_elementos['estados'].pausa = true;
+
+					break;
+
+				}
+
+			} else if( contenedor_elementos['estados'].pausa ) {
+
+				// Si pulsa alguna tecla...
+				switch (keycode) {
+				// Si pulsa la tecla enter.
+					case 13:
+
+						// Información en consola javascript del navegador.
+						console.info("Estado: Juego.");
+
+						contenedor_elementos['estados'].pausa = false;
+						contenedor_elementos['estados'].juego = true;
+
+					break;
+
+				}
+
 			}
 
 			// El evento continúa normalmente.

@@ -109,21 +109,21 @@ function Camara2D(imagenes, elementos) {
 			texto[14] = '<http://www.gnu.org/licenses/>.';
 			texto[15] = '';
 
-			this.contextGameScreen.fillStyle = '#FFFFFF';
-			this.contextGameScreen.fillRect(0, 0, this.canvasGameScreen.width, this.canvasGameScreen.height);
+			this.contextBufferScreen.fillStyle = '#FFFFFF';
+			this.contextBufferScreen.fillRect(0, 0, this.canvasGameScreen.width, this.canvasGameScreen.height);
 
-			this.contextGameScreen.font = "normal 18px verdana";
-			this.contextGameScreen.fillStyle = '#000000';
-			this.contextGameScreen.textBaseline = 'top';
+			this.contextBufferScreen.font = "normal 18px verdana";
+			this.contextBufferScreen.fillStyle = '#000000';
+			this.contextBufferScreen.textBaseline = 'top';
 
-			this.contextGameScreen.drawImage(this.img['gplv3-127x51'], 50, 30);
+			this.contextBufferScreen.drawImage(this.img['gplv3-127x51'], 50, 30);
 			var i;
 			for(i = 0; i < texto.length; i++) {
-				this.contextGameScreen.fillText(texto[i], 25, 90+i*20);
+				this.contextBufferScreen.fillText(texto[i], 25, 90+i*20);
 			}
 
-			this.contextGameScreen.fillStyle = '#000099'; 
-			this.contextGameScreen.fillText('Pulsa una tecla para continuar.', 30, 90+i*20);
+			this.contextBufferScreen.fillStyle = '#000099'; 
+			this.contextBufferScreen.fillText('Pulsa una tecla para continuar.', 30, 90+i*20);
 
 		// Mostrar pantalla de menú.
 		} else if( elementos['estados'].menu ) {

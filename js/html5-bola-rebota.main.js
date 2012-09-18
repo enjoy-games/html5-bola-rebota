@@ -132,6 +132,25 @@
 	// Actualiza los datos necesarios en cada 'fps'.
 	function buclePrincipal() {
 
+	// ESTADO: LICENCIA.
+
+		if( contenedor_elementos['estados'].licencia  ) {
+
+			// Objeto bola.
+			contenedor_elementos['bola'].x = 800/2;
+			contenedor_elementos['bola'].y = 600/2;
+
+			// Objeto pala_jugador.
+			contenedor_elementos['pala_jugador'].x = 800/2;
+			contenedor_elementos['pala_jugador'].y = 100;
+			contenedor_elementos['pala_jugador'].puntos = 0;
+
+			// Objeto pala_ia.
+			contenedor_elementos['pala_ia'].x = contenedor_elementos['pala_jugador'].x;
+			contenedor_elementos['pala_ia'].y =  1;
+			contenedor_elementos['pala_ia'].puntos = 0;
+
+		}
 
 	// ESTADO: JUEGO.
 
@@ -207,18 +226,37 @@
 			contenedor_elementos['estados'].juego = false;
 			contenedor_elementos['estados'].ganador = true;
 
+			contenedor_elementos['pala_jugador'].puntos = 0;
+
 			// Reiniciar tras 5 segundos.
-			// TODO
+			setTimeout(function(){
+
+				console.info('Fin de juego: Reiniciar.');
+
+				contenedor_elementos['estados'].ganador = false;
+				contenedor_elementos['estados'].licencia = true;
+
+			}, 5000);
 
 		}
 
 		// Gana la IA.
 		if( contenedor_elementos['pala_ia'].puntos >= 3 ) {
+
 			contenedor_elementos['estados'].juego = false;
 			contenedor_elementos['estados'].perdedor = true;
 
+			contenedor_elementos['pala_ia'].puntos = 0;
+
 			// Reiniciar tras 5 segundos.
-			// TODO
+			setTimeout(function(){
+
+				console.info('Fin de juego: Reiniciar.');
+
+				contenedor_elementos['estados'].perdedor = false;
+				contenedor_elementos['estados'].licencia = true;
+
+			}, 5000);
 
 		}
 

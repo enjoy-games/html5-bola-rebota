@@ -86,40 +86,6 @@
 		perdedor: false
 	};
 
-	// Objeto bola.
-	contenedor_elementos['bola'] = {
-		x: 800/2,
-		y: 600/2,
-		vel_x: 16,
-		vel_y: -8,
-		top: 0,
-		left: 100,
-		right: 700 - 16,
-		bottom: 600 - 16,
-		ancho: 16,
-		alto: 16
-	};
-
-	// Objeto pala_jugador.
-	contenedor_elementos['pala_jugador'] = {
-		x: 800/2,
-		y: 100,
-		vel_x: 4,
-		left: contenedor_elementos['bola'].left,
-		right: contenedor_elementos['bola'].right,
-		puntos: 0
-	};
-
-	// Objeto pala_ia.
-	contenedor_elementos['pala_ia'] = {
-		x: contenedor_elementos['pala_jugador'].x,
-		y: 1,
-		vel_x: contenedor_elementos['pala_jugador'].vel_x,
-		left: contenedor_elementos['pala_jugador'].y.left,
-		right: contenedor_elementos['pala_jugador'].y.right,
-		puntos: 0
-	};
-
 	// Referencia al objeto de clase camara2d.
 	var camara2d = null;
 
@@ -137,18 +103,40 @@
 		if( contenedor_elementos['estados'].licencia  ) {
 
 			// Objeto bola.
-			contenedor_elementos['bola'].x = 800/2;
-			contenedor_elementos['bola'].y = 600/2;
+			contenedor_elementos['bola'] = {
+				x: 800/2,
+				y: 600/2,
+				vel_x: 16,
+				vel_y: -8,
+				top: 0,
+				left: 100,
+				right: 700 - 16,
+				bottom: 600 - 16,
+				ancho: 16,
+				alto: 16
+			};
 
 			// Objeto pala_jugador.
-			contenedor_elementos['pala_jugador'].x = 800/2;
-			contenedor_elementos['pala_jugador'].y = 100;
-			contenedor_elementos['pala_jugador'].puntos = 0;
+			contenedor_elementos['pala_jugador'] = {
+				x: 800/2,
+				y: 570,
+				vel_x: 8,
+				left: contenedor_elementos['bola'].left,
+				right: contenedor_elementos['bola'].right,
+				puntos: 0
+			};
 
 			// Objeto pala_ia.
-			contenedor_elementos['pala_ia'].x = contenedor_elementos['pala_jugador'].x;
-			contenedor_elementos['pala_ia'].y =  1;
-			contenedor_elementos['pala_ia'].puntos = 0;
+			contenedor_elementos['pala_ia'] = {
+				x: contenedor_elementos['pala_jugador'].x,
+				y: 1,
+				vel_x: contenedor_elementos['pala_jugador'].vel_x,
+				left: contenedor_elementos['pala_jugador'].y.left,
+				right: contenedor_elementos['pala_jugador'].y.right,
+
+				puntos: 0
+			};
+
 
 		}
 
@@ -364,12 +352,41 @@
 
 					break;
 
+				// Si pulsa la tecla flecha izquierda.
+					case 37:
+
+						// Limite izquierdo.
+						if( contenedor_elementos['pala_jugador'].x > contenedor_elementos['pala_jugador'].left )
+							// Se mueve a la izquierda.
+							contenedor_elementos['pala_jugador'].x -= contenedor_elementos['pala_jugador'].vel_x;
+
+						// Se asegura de que no sobrepasa el límite izquierdo.
+						if( contenedor_elementos['pala_jugador'].x < contenedor_elementos['pala_jugador'].left )
+							contenedor_elementos['pala_jugador'].x = contenedor_elementos['pala_jugador'].left;
+
+					break;
+
+				// Si pulsa la tecla flecha izquierda.
+					case 39:
+
+						// Limite derecho.
+						if( contenedor_elementos['pala_jugador'].x < contenedor_elementos['pala_jugador'].right - 25)
+							// Se mueve a la derecha.
+							contenedor_elementos['pala_jugador'].x += contenedor_elementos['pala_jugador'].vel_x;
+
+						// Se asegura de que no sobrepasa el límite derecho.
+						if( contenedor_elementos['pala_jugador'].x > contenedor_elementos['pala_jugador'].right - 25)
+							contenedor_elementos['pala_jugador'].x = contenedor_elementos['pala_jugador'].right - 25;
+
+					break;
+
 				}
 
 			} else if( contenedor_elementos['estados'].pausa ) {
 
 				// Si pulsa alguna tecla...
 				switch (keycode) {
+
 				// Si pulsa la tecla enter.
 					case 13:
 

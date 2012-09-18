@@ -152,7 +152,7 @@ function Camara2D(imagenes, elementos) {
 
 				// Posición de la caja.
 				var x = this.elementos['bola'].x + 19;
-				var y = this.elementos['bola'].y + 19;
+				var y = this.elementos['bola'].y;
 
 				// Alto del texto en medida pt.
 				var height = 10;
@@ -180,15 +180,16 @@ function Camara2D(imagenes, elementos) {
 				this.contextBufferScreen.beginPath();
 				this.contextBufferScreen.fillStyle = "#d0efff";
 				this.contextBufferScreen.fillRect(
-					x - 2,
-					y - height - 2,
-					width + 4,
+					x,
+					y,
+					width,
 					lines.length*height + 4
 				);
 
 				// Dibuja el texto.
 				this.contextBufferScreen.beginPath();
 				this.contextBufferScreen.fillStyle = "#555555";
+				this.contextBufferScreen.textBaseline = 'top';
 				for( var i = 0; i < lines.length; i++ )
 					this.contextBufferScreen.fillText(lines[i], x, y + i*height);
 
@@ -226,6 +227,65 @@ function Camara2D(imagenes, elementos) {
 				56
 			);
 
+
+		// PALA JUGADOR.    --------//
+
+			// Dibuja la pala del jugador en la pantalla.
+			this.contextBufferScreen.drawImage(
+				this.img['pala_jugador'],
+				this.elementos['pala_jugador'].x,
+				this.elementos['pala_jugador'].y
+			);
+
+			// Depuración de pala del jugador.
+			if( this.debugMode ) {
+
+				// Posición de la caja.
+				var x = this.elementos['pala_jugador'].x + 41;
+				var y = this.elementos['pala_jugador'].y;
+
+				// Alto del texto en medida pt.
+				var height = 10;
+
+				// Datos a mostrar.
+				var x_pos = Math.round(this.elementos['pala_jugador'].x * 100) / 100;
+				var y_pos = Math.round(this.elementos['pala_jugador'].y * 100) / 100;
+				var vel_x = Math.round(this.elementos['pala_jugador'].vel_x * 100) / 100;
+
+				// Lineas de información.
+				var lines = Array();
+				lines[0] = "x=" + x_pos + ",y=" + y_pos;
+				lines[1] = "vel_x=" + vel_x + "";
+
+				// Tamaño y fuente.
+				this.contextBufferScreen.font = height + "pt Calibri";
+
+				// Obtiene el ancho de la primera línea.
+				var metrics = this.contextBufferScreen.measureText("x=000.00,y=000.00");
+				var width = metrics.width;
+
+				// Dibuja la caja.
+				this.contextBufferScreen.beginPath();
+				this.contextBufferScreen.fillStyle = "#d0efff";
+				this.contextBufferScreen.fillRect(
+
+					x,
+					y,
+					width,
+					lines.length*height + 4
+
+				);
+
+				// Dibuja el texto.
+				this.contextBufferScreen.beginPath();
+				this.contextBufferScreen.fillStyle = "#555555";
+				this.contextBufferScreen.textBaseline = 'top';
+				for( var i = 0; i < lines.length; i++ )
+					this.contextBufferScreen.fillText(lines[i], x, y + i*height);
+
+			}
+
+
 		// Mostrar texto de ganador.
 		} else if( elementos['estados'].ganador ) {
 
@@ -248,7 +308,6 @@ function Camara2D(imagenes, elementos) {
 			// Dibuja la caja.
 			this.contextBufferScreen.beginPath();
 			this.contextBufferScreen.fillStyle = "#9ff781";
-			this.contextBufferScreen.textBaseline = 'top';
 			this.contextBufferScreen.fillRect(
 				x,
 				y,
@@ -259,6 +318,7 @@ function Camara2D(imagenes, elementos) {
 			// Dibuja el texto.
 			this.contextBufferScreen.beginPath();
 			this.contextBufferScreen.fillStyle = "#38610b";
+			this.contextBufferScreen.textBaseline = 'top';
 			this.contextBufferScreen.fillText(
 				texto,
 				x,
@@ -288,7 +348,6 @@ function Camara2D(imagenes, elementos) {
 
 			this.contextBufferScreen.beginPath();
 			this.contextBufferScreen.fillStyle = "#c01111";
-			this.contextBufferScreen.textBaseline = 'top';
 			this.contextBufferScreen.fillRect(
 				x,
 				y,
@@ -299,6 +358,7 @@ function Camara2D(imagenes, elementos) {
 			// Dibuja el texto.
 			this.contextBufferScreen.beginPath();
 			this.contextBufferScreen.fillStyle = "#200000";
+			this.contextBufferScreen.textBaseline = 'top';
 			this.contextBufferScreen.fillText(
 				texto,
 				x,
@@ -327,7 +387,6 @@ function Camara2D(imagenes, elementos) {
 			// Dibuja la caja.
 			this.contextBufferScreen.beginPath();
 			this.contextBufferScreen.fillStyle = "#ffffff";
-			this.contextBufferScreen.textBaseline = 'top';
 			this.contextBufferScreen.fillRect(
 				x,
 				y,
@@ -338,6 +397,7 @@ function Camara2D(imagenes, elementos) {
 			// Dibuja el texto.
 			this.contextBufferScreen.beginPath();
 			this.contextBufferScreen.fillStyle = "#222222";
+			this.contextBufferScreen.textBaseline = 'top';
 			this.contextBufferScreen.fillText(
 				texto,
 				x,

@@ -260,13 +260,50 @@ function Camara2D(imagenes, elementos) {
 			this.contextBufferScreen.beginPath();
 			this.contextBufferScreen.fillStyle = "#38610b";
 			this.contextBufferScreen.fillText(
-				"Has ganado",
+				texto,
 				x,
 				y
 			);
 
 		// Mostrar texto de perdedor.
 		} else if( elementos['estados'].perdedor ) {
+
+			// Alto del texto en medida pt.
+			var height = 40;
+
+			// Tamaño y fuente.
+			this.contextBufferScreen.font = height + "pt Calibri";
+
+			// Texto a mostrar.
+			var texto = "Has perdido";
+
+			// Obtiene el ancho del texto a mostrar.
+			var width = this.contextBufferScreen.measureText(texto).width;
+
+			// Posición de la caja.
+			var x = 800/2 - width/2;
+			var y = 600/2;
+
+			// Dibuja la caja.
+
+			this.contextBufferScreen.beginPath();
+			this.contextBufferScreen.fillStyle = "#c01111";
+			this.contextBufferScreen.textBaseline = 'top';
+			this.contextBufferScreen.fillRect(
+				x,
+				y,
+				width,
+				height + 25
+			);
+
+			// Dibuja el texto.
+			this.contextBufferScreen.beginPath();
+			this.contextBufferScreen.fillStyle = "#200000";
+			this.contextBufferScreen.fillText(
+				texto,
+				x,
+				y
+			);
 
 		// Mostrar pantalla de pausa.
 		} else if( elementos['estados'].pausa ) {

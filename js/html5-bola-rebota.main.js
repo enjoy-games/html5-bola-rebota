@@ -120,7 +120,7 @@
 			contenedor_elementos['pala_jugador'] = {
 				x: 800/2,
 				y: 570,
-				vel_x: 8,
+				vel_x: 0,
 				left: contenedor_elementos['bola'].left,
 				right: contenedor_elementos['bola'].right,
 				puntos: 0
@@ -130,7 +130,7 @@
 			contenedor_elementos['pala_ia'] = {
 				x: contenedor_elementos['pala_jugador'].x,
 				y: 1,
-				vel_x: contenedor_elementos['pala_jugador'].vel_x,
+				vel_x: 0,
 				left: contenedor_elementos['pala_jugador'].y.left,
 				right: contenedor_elementos['pala_jugador'].y.right,
 
@@ -199,6 +199,23 @@
 				contenedor_elementos['pala_ia'].puntos ++;
 
 			}
+
+
+		// ACTUALIZA EL ESTADO DE LA PALA DEL JUGADOR.
+
+			// Limite izquierdo.
+			if( contenedor_elementos['pala_jugador'].x >= contenedor_elementos['pala_jugador'].left
+				&& contenedor_elementos['pala_jugador'].x <= contenedor_elementos['pala_jugador'].right - 25 )
+				// Se mueve a la izquierda.
+				contenedor_elementos['pala_jugador'].x += contenedor_elementos['pala_jugador'].vel_x;
+
+			// Se asegura de que no sobrepasa el límite izquierdo.
+			if( contenedor_elementos['pala_jugador'].x < contenedor_elementos['pala_jugador'].left )
+				contenedor_elementos['pala_jugador'].x = contenedor_elementos['pala_jugador'].left;
+
+			// Se asegura de que no sobrepasa el límite derecho.
+			if( contenedor_elementos['pala_jugador'].x > contenedor_elementos['pala_jugador'].right - 25)
+				contenedor_elementos['pala_jugador'].x = contenedor_elementos['pala_jugador'].right - 25;
 
 		}
 
@@ -356,28 +373,14 @@
 				// Si pulsa la tecla flecha izquierda.
 					case 37:
 
-						// Limite izquierdo.
-						if( contenedor_elementos['pala_jugador'].x > contenedor_elementos['pala_jugador'].left )
-							// Se mueve a la izquierda.
-							contenedor_elementos['pala_jugador'].x -= contenedor_elementos['pala_jugador'].vel_x;
-
-						// Se asegura de que no sobrepasa el límite izquierdo.
-						if( contenedor_elementos['pala_jugador'].x < contenedor_elementos['pala_jugador'].left )
-							contenedor_elementos['pala_jugador'].x = contenedor_elementos['pala_jugador'].left;
+						contenedor_elementos['pala_jugador'].vel_x = -10;
 
 					break;
 
 				// Si pulsa la tecla flecha izquierda.
 					case 39:
 
-						// Limite derecho.
-						if( contenedor_elementos['pala_jugador'].x < contenedor_elementos['pala_jugador'].right - 25)
-							// Se mueve a la derecha.
-							contenedor_elementos['pala_jugador'].x += contenedor_elementos['pala_jugador'].vel_x;
-
-						// Se asegura de que no sobrepasa el límite derecho.
-						if( contenedor_elementos['pala_jugador'].x > contenedor_elementos['pala_jugador'].right - 25)
-							contenedor_elementos['pala_jugador'].x = contenedor_elementos['pala_jugador'].right - 25;
+						contenedor_elementos['pala_jugador'].vel_x = 10;
 
 					break;
 
@@ -405,6 +408,18 @@
 
 			// El evento continúa normalmente.
 			return true;
+		});
+
+
+		// Evento de tecla levantada.
+		$(window).keyup(function (e) {
+
+			// Información en consola javascript del navegador.
+			console.info("Evento window.onkeyup (" + e.keyCode + ":" + String.fromCharCode(e.keyCode) + ", " + e.which + ":" + String.fromCharCode(e.which) + ")");
+			console.info(e);
+
+			contenedor_elementos['pala_jugador'].vel_x = 0;
+
 		});
 
 		// Ejecuta el bucle principal.

@@ -172,6 +172,19 @@
 
 			}
 
+			// Colision con pala jugador.
+			if( contenedor_elementos['bola'].x + 16 >= contenedor_elementos['pala_jugador'].x
+				&& contenedor_elementos['bola'].x + 16 <= contenedor_elementos['pala_jugador'].x + 38
+				&& contenedor_elementos['bola'].y + 32 > contenedor_elementos['pala_jugador'].y ) {
+console.info('colisión pala jugador');
+				// Respeta el límite.
+				contenedor_elementos['bola'].y = contenedor_elementos['pala_jugador'].y - 32;
+
+				// Rebota.
+				contenedor_elementos['bola'].vel_y = -8; // TODO random.
+
+			}
+
 			// Colision con borde superior.
 			if( contenedor_elementos['bola'].y < contenedor_elementos['bola'].top ) {
 

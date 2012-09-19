@@ -290,9 +290,10 @@
 		};
 
 		// Evento de tecla pulsada.
-		window.onkeydown = function (e) {
+		$(window).keydown(function (e) {
 			// Información en consola javascript del navegador.
 			console.info("Evento window.onkeydown (" + e.keyCode + ":" + String.fromCharCode(e.keyCode) + ", " + e.which + ":" + String.fromCharCode(e.which) + ")");
+			console.info(e);
 
 			// Almacena código numérico del caracter pulsado.
 			var keycode = null;
@@ -404,7 +405,7 @@
 
 			// El evento continúa normalmente.
 			return true;
-		};
+		});
 
 		// Ejecuta el bucle principal.
 		buclePrincipal();

@@ -51,7 +51,7 @@ function Camara2D(imagenes, elementos) {
 // PROPIEDADES.    --------//
 
 	// Activa o desactiva modo debug.
-	this.debugMode = true;
+	this.debugMode = false;
 
 	// Referencia al almacén de imágenes.
 	this.img = imagenes;

@@ -286,6 +286,64 @@ function Camara2D(imagenes, elementos) {
 			}
 
 
+		// PALA IA.    --------//
+
+			// Dibuja la pala de la inteligencia artificial en la pantalla.
+			this.contextBufferScreen.drawImage(
+				this.img['pala_ia'],
+				this.elementos['pala_ia'].x,
+				this.elementos['pala_ia'].y
+			);
+
+			// Depuración de pala de la IA.
+			if( this.debugMode ) {
+
+				// Posición de la caja.
+				var x = this.elementos['pala_ia'].x + 41;
+				var y = this.elementos['pala_ia'].y;
+
+				// Alto del texto en medida pt.
+				var height = 10;
+
+				// Datos a mostrar.
+				var x_pos = Math.round(this.elementos['pala_ia'].x * 100) / 100;
+				var y_pos = Math.round(this.elementos['pala_ia'].y * 100) / 100;
+				var vel_x = Math.round(this.elementos['pala_ia'].vel_x * 100) / 100;
+
+				// Lineas de información.
+				var lines = Array();
+				lines[0] = "x=" + x_pos + ",y=" + y_pos;
+				lines[1] = "vel_x=" + vel_x + "";
+
+				// Tamaño y fuente.
+				this.contextBufferScreen.font = height + "pt Calibri";
+
+				// Obtiene el ancho de la primera línea.
+				var metrics = this.contextBufferScreen.measureText("x=000.00,y=000.00");
+				var width = metrics.width;
+
+				// Dibuja la caja.
+				this.contextBufferScreen.beginPath();
+				this.contextBufferScreen.fillStyle = "#d0efff";
+				this.contextBufferScreen.fillRect(
+
+					x,
+					y,
+					width,
+					lines.length*height + 4
+
+				);
+
+				// Dibuja el texto.
+				this.contextBufferScreen.beginPath();
+				this.contextBufferScreen.fillStyle = "#555555";
+				this.contextBufferScreen.textBaseline = 'top';
+				for( var i = 0; i < lines.length; i++ )
+					this.contextBufferScreen.fillText(lines[i], x, y + i*height);
+
+			}
+
+
 		// Mostrar texto de ganador.
 		} else if( elementos['estados'].ganador ) {
 

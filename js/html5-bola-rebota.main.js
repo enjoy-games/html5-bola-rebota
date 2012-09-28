@@ -129,11 +129,10 @@
 			// Objeto pala_ia.
 			contenedor_elementos['pala_ia'] = {
 				x: contenedor_elementos['pala_jugador'].x,
-				y: 1,
+				y: 20,
 				vel_x: 0,
-				left: contenedor_elementos['pala_jugador'].y.left,
-				right: contenedor_elementos['pala_jugador'].y.right,
-
+				left: contenedor_elementos['pala_jugador'].left,
+				right: contenedor_elementos['pala_jugador'].right,
 				puntos: 0
 			};
 
@@ -176,12 +175,29 @@
 			if( contenedor_elementos['bola'].x + 16 >= contenedor_elementos['pala_jugador'].x
 				&& contenedor_elementos['bola'].x + 16 <= contenedor_elementos['pala_jugador'].x + 38
 				&& contenedor_elementos['bola'].y + 32 > contenedor_elementos['pala_jugador'].y ) {
-console.info('colisión pala jugador');
+
+				console.info('colisión pala jugador');
+
 				// Respeta el límite.
 				contenedor_elementos['bola'].y = contenedor_elementos['pala_jugador'].y - 32;
 
 				// Rebota.
 				contenedor_elementos['bola'].vel_y = -8; // TODO random.
+
+			}
+
+			// Colision con pala IA.
+			if( contenedor_elementos['bola'].x + 16 >= contenedor_elementos['pala_ia'].x
+				&& contenedor_elementos['bola'].x + 16 <= contenedor_elementos['pala_ia'].x + 38
+				&& contenedor_elementos['bola'].y < contenedor_elementos['pala_ia'].y + 10 ) {
+
+				console.info('colisión pala ia');
+
+				// Respeta el límite.
+				contenedor_elementos['bola'].y = contenedor_elementos['pala_ia'].y + 10;
+
+				// Rebota.
+				contenedor_elementos['bola'].vel_y = 8; // TODO random.
 
 			}
 
@@ -219,7 +235,7 @@ console.info('colisión pala jugador');
 			// Limite izquierdo.
 			if( contenedor_elementos['pala_jugador'].x >= contenedor_elementos['pala_jugador'].left
 				&& contenedor_elementos['pala_jugador'].x <= contenedor_elementos['pala_jugador'].right - 25 )
-				// Se mueve a la izquierda.
+				// Se mueve.
 				contenedor_elementos['pala_jugador'].x += contenedor_elementos['pala_jugador'].vel_x;
 
 			// Se asegura de que no sobrepasa el límite izquierdo.
@@ -229,6 +245,41 @@ console.info('colisión pala jugador');
 			// Se asegura de que no sobrepasa el límite derecho.
 			if( contenedor_elementos['pala_jugador'].x > contenedor_elementos['pala_jugador'].right - 25)
 				contenedor_elementos['pala_jugador'].x = contenedor_elementos['pala_jugador'].right - 25;
+
+
+		// ACTUALIZA EL ESTADO DE LA PALA DE LA IA.
+
+			// Limite izquierdo.
+			if( contenedor_elementos['pala_ia'].x >= contenedor_elementos['pala_ia'].left
+				&& contenedor_elementos['pala_ia'].x <= contenedor_elementos['pala_ia'].right - 25 ) {
+
+				if( contenedor_elementos['pala_ia'].x >= contenedor_elementos['bola'].x ) {
+
+					// Se mueve a la izquierda.
+					contenedor_elementos['pala_ia'].vel_x = -18;
+
+				}
+				if( contenedor_elementos['pala_ia'].x + 38 <= contenedor_elementos['bola'].x ) {
+
+					// Se mueve a la derecha.
+					contenedor_elementos['pala_ia'].vel_x = 18;
+
+				}
+			} else {
+
+				contenedor_elementos['pala_ia'].vel_x = 0;
+
+			}
+
+				contenedor_elementos['pala_ia'].x += contenedor_elementos['pala_ia'].vel_x;
+
+			// Se asegura de que no sobrepasa el límite izquierdo.
+			if( contenedor_elementos['pala_ia'].x < contenedor_elementos['pala_ia'].left )
+				contenedor_elementos['pala_ia'].x = contenedor_elementos['pala_ia'].left;
+
+			// Se asegura de que no sobrepasa el límite derecho.
+			if( contenedor_elementos['pala_ia'].x > contenedor_elementos['pala_ia'].right - 25)
+				contenedor_elementos['pala_ia'].x = contenedor_elementos['pala_ia'].right - 25;
 
 		}
 

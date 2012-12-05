@@ -347,7 +347,10 @@
 
 
 		// Crea un hilo de ejecución para el siguiente frame.
-		mainLoop = window.requestAnimationFrame(buclePrincipal);
+		setTimeout(function() {
+			mainLoop = window.requestAnimationFrame(buclePrincipal);
+		}, 1000/32 );
+
 
 		// Estadísticas.
 		stats_fps.end();

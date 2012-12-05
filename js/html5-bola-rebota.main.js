@@ -92,11 +92,27 @@
 	// Referencia al hilo de ejecución del bucle principal.
 	var mainLoop = null;
 
+	// Estadísticas.
+	var stats_fps = new Stats(), stats_ms = new Stats();
+	stats_fps.setMode(0); stats_ms.setMode(1); // 0: fps, 1: ms
+	// Align top-left
+	stats_fps.domElement.style.position = 'absolute';
+	stats_fps.domElement.style.left = '0px';
+	stats_fps.domElement.style.top = '0px';
+	// Align top-left
+	stats_ms.domElement.style.position = 'absolute';
+	stats_ms.domElement.style.left = '100px';
+	stats_ms.domElement.style.top = '0px';
+
 
 // FUNCIONES.    --------//
 
 	// Actualiza los datos necesarios en cada 'fps'.
 	function buclePrincipal() {
+		// Estadísticas.
+		stats_fps.begin();
+		stats_ms.begin();
+
 
 	// ESTADO: LICENCIA.
 
@@ -333,6 +349,9 @@
 		// Crea un hilo de ejecución para el siguiente frame.
 		mainLoop = window.requestAnimationFrame(buclePrincipal);
 
+		// Estadísticas.
+		stats_fps.end();
+		stats_ms.end();
 	};
 
 
@@ -351,6 +370,11 @@
 
 		// Ajuste del canvas a la resolución de pantalla.
 		camara2d.ajustarGameScreen();
+
+		/* Estadísticas. * /
+		document.body.appendChild( stats_fps.domElement );
+		document.body.appendChild( stats_ms.domElement );
+		/**/
 
 		// Evento de cambio del tamaño de la ventana.
 		$(window).resize(function() {

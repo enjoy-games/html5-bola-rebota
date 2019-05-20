@@ -2,7 +2,7 @@ html5-bola-rebota
 =================
 
 Juego en html5canvas parecido al PONG
-
+<!-- sehsetrhjrdthsrhrdth -->
 <img src="screenshot-bola-rebota.jpg" style="border:0;">
 
 ### ¿Quieres jugar?

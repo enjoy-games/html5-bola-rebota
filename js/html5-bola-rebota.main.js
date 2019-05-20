@@ -43,6 +43,8 @@
 ;
 // VARIABLES.    --------//
 
+//fgjgftdjfdjdfjdfjdfjfjdfjfj
+
 	// Contenedor de imagenes.
 	var contenedor_imagenes = new Object();
 
